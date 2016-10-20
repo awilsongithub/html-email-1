@@ -1,12 +1,43 @@
-<!-- THERE ARE several different recomendations about the doctype to use. -->
+<!--
+
+===============================
+NOTES ON RESPONSIVE EMAILS
+===============================
+- inline styling for older emial clients. inline trumps remote style rules so use !important flag to override them in remote CSS.
+- THERE ARE several different recomendations about the doctype to use.
+
+-->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Our Vineyard</title>
+
+		/* css goes here */
 		<style type="text/css">
-			/* css goes here */
+
+			/*medium */
+			/*since no min-width will apply to smaller queries too*/
+			@media only screen and (max-width: 660px){
+				table.container{ width: 480px !important; }
+				td.logo img { display: none; }
+				td.logo {background: #fff url(images/logo_medium.gif) no-repeat 10px 10px; height: 45px; }
+			}
+
+			@media only screen and (max-width: 510px){
+				table.container {width: 100% !important; }
+				table.container td {border: none !important; }
+				td.logo {background: #fff url(images/logo_small.gif) no-repeat center 10px; height: 32px; }
+
+			}
+
+
+
+
+
+
+
 		</style>
 	</head>
 	<body bgcolor='#efe1b0'>
