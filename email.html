@@ -3,10 +3,18 @@
 ===============================
 NOTES ON RESPONSIVE EMAILS
 ===============================
-- inline styling for older emial clients. inline trumps remote style rules so use !important flag to override them in remote CSS.
-- THERE ARE several different recomendations about the doctype to use.
-- GIF animation: be sure first and last frame has basic image in case gifs don't work. don't use background images for resizing of gif animations.
+- TRUMPING STYLE RULES
+	inline styling for older emial clients. inline trumps remote style rules so use !important flag to override them in remote CSS.
+- DOCTYPE
+	THERE ARE several different recomendations about the doctype to use.
+- GIF ANIMATIONS
+	be sure first and last frame has basic image in case gifs don't work. don't use background images for resizing of gif animations.
 - WEB FONTS:
+	@import alternative must be first line of styles css
+- INCLUDING IMAGES:
+	Aembed base64 is src attribute or link to externally hosted. both will get blocked in some webmail clients. Meetup and Amazon email images link to online server and are small 100px or so. 
+- VALIDATE AND TEST
+	validator.w3.org/ and inboxinspector.com
 -->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,11 +25,8 @@ NOTES ON RESPONSIVE EMAILS
 
 		<!--  css goes here  -->
 		<style type="text/css">
-
 			/*@import needs to be first line in CSS */
 			@import url('https://fonts.googleapis.com/css?family=Kaushan+Script');
-
-
 			/* so edge to edge on small screens */
 			body { margin: 0px; padding: 0px; }
 
@@ -59,8 +64,33 @@ NOTES ON RESPONSIVE EMAILS
 				td.callout table.callout_4 td { padding: 0px 20px 0px 60px !important; background: url(images/icon_camera.gif) no-repeat 10px -23px; }
 				td.callout table br.spacer { display: inline; }
 
+				video { width: 416px !important; height: 312px !important; }
+				video img { width: 416px !important; height: 312px !important; }
 
 			}
+
+			/* high definition graphics for medium screens */
+			/* devices */
+			/* images w/ dimensions since img file has more px */
+			/*@media
+				only screen and (max-width: 660px) and (-webkit-min-device-pixel-ratio: 2),
+				only screen and (max-width: 660px) and (min--moz-device-pixel-ratio: 2),
+				only screen and (max-width: 660px) and (-o-min-device-pixel-ratio: 2/1),
+				only screen and (max-width: 660px) and (min-device-pixel-ratio: 2),
+				only screen and (max-width: 660px) and (min-resolution: 192dpi),
+				only screen and (max-width: 660px) and (min-resolution: 2dppx)
+			{
+				td.logo  { background-image: url(images/logo_medium_2x.gif); background-size: 510px 38px; }
+				td.banner { background-image: url(images/banner_medium_2x.jpg); background-size:  478px 150px; }
+				td.content { background-image: url(images/banner_medium_ghost_2x.jpg) !important; background-size: 478px 90px; }
+				td.promos table.promo_1 td { background-image: url(images/promo_1_medium_2x.jpg); background-size: 185px 90px; }
+				td.promos table.promo_2 td { background-image: url(images/promo_2_medium_2x.jpg); background-size: 185px 90px; }
+				td.callout table.callout_1 td { background-image: url(images/icon_grapes_2x.gif); background-size: 75px 75px; }
+				td.callout table.callout_2 td { background-image: url(images/icon_bottle_2x.gif); background-size: 75px 75px; }
+				td.callout table.callout_3 td { background-image: url(images/icon_basket_2x.gif); background-size: 75px 75px; }
+				td.callout table.callout_4 td { background-image: url(images/icon_camera_2x.gif); background-size: 75px 75px; }
+			}*/
+
 
 			/* small */
 			@media only screen and (max-width: 510px){
@@ -74,8 +104,6 @@ NOTES ON RESPONSIVE EMAILS
 				td.banner { height: 115px; background: url(images/banner_small.jpg) no-repeat right 0px; }
 
 				td.content { line-height: 20px !important; padding-bottom: 10px !important; background: #f5f2e5 url(images/banner_small_ghost.jpg) no-repeat right 0px !important; }
-
-				td.footer { padding: 20px 30px !important; }
 
 				td.promos table.promo_1 {width: 100% !important; border-top: 1px solid #71a412; }
 				td.promos table.promo_1 td { background: url(images/promo_1_small.jpg) no-repeat 0px 40px; padding: 20px 0px 40px 110px; }
@@ -91,7 +119,10 @@ NOTES ON RESPONSIVE EMAILS
 				td.callout table.callout_3 td { background-position: 0px -7px; }
 				td.callout table.callout_4 td { background-position: 4px -17px; }
 
+				td.footer {padding: 20px 30px !important; }
 
+				video { width: 300px !important; height: 255px !important; }
+				video img { width: 300px !important; height: 255px !important; }
 			}
 
 		</style>
@@ -161,7 +192,18 @@ NOTES ON RESPONSIVE EMAILS
 				<!-- promos -->
 				<tr>
 					<td valign="top" bgcolor="#f5f2e5" class="promos" style="padding: 10px 30px 25px 30px; border-right:1px solid #dbc064; border-left:1px solid #dbc064; background-color: #f5f2e5; font-family: Arial, Helvetica, sans-serif;">
-					<table class='promo_1' width='270' align='left'>
+
+						<!-- html5 video  -->
+						<video width='570' height='428'  poster="video/our_vineyard.jpg" controls='controls'>
+							<source src="video/our_vineyard.mp4"  type="video/mp4">
+							<!-- for clients that don't understand video tag -->
+							<a href="http://yoursite.com/video.html">
+								<img src="video/our_vineyard.jpg" alt="Vineyard Video Image" />
+							</a>
+						</video>
+
+					<!-- promo image tables replaced with video -->
+					<!-- <table class='promo_1' width='270' align='left'>
 					<tr>
 						<td>
 							<img class="promo" alt="Promo image 1" src="images/promo_1_large.jpg">
@@ -184,7 +226,7 @@ NOTES ON RESPONSIVE EMAILS
 						</td>
 					</tr>
 
-					</table>
+					</table> -->
 					</td>
 				</tr>
 
